@@ -21,6 +21,7 @@ class SearchPage extends StatelessWidget {
                   title: 'Busque uma cidade',
                   hideSearch: true),
               drawer: CustomDrawer(pageContext: context),
+              backgroundColor: Colors.white,
               body: Center(
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

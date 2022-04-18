@@ -21,6 +21,7 @@ class HomePage extends StatelessWidget {
                   title: 'Página Home',
                   hideSearch: false),
               drawer: CustomDrawer(pageContext: context),
+              backgroundColor: Colors.white,
               body: Center(
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

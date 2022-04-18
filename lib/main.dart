@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'src/models/appdata.dart';
 import 'src/pages/preload.dart';
-
+import 'src/pages/continente.dart';
 import 'src/pages/home.dart';
 
 void main() => runApp(MultiProvider(
@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/preload': (context) => PreloadPage(),
         '/home': (context) => HomePage(),
-        '/search': (context) => SearchPage()
+        '/search': (context) => SearchPage(),
+        '/continent': (context) => ContinentePage()
       },
       initialRoute: '/preload',
     );
