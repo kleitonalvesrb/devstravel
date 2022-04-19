@@ -11,6 +11,15 @@ class ContinentePage extends StatelessWidget {
   TextStyle styles = const TextStyle(
       fontSize: 15, fontWeight: FontWeight.bold, fontFamily: 'Helvetica Neue');
 
+  void seeCityAction(context, continenteIndex) {
+    print("continente index ${continenteIndex}");
+    Navigator.pushNamed(context, '/ListCity', arguments: continenteIndex);
+  }
+
+  void cityBoxAction(cityData) {
+    print(cityData['name']);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AppData>(
@@ -36,24 +45,39 @@ class ContinentePage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 15),
+                            child: Text(
+                              "${appdata.data[index]['name']} (${cities.length})",
+                              style: const TextStyle(
+                                  fontFamily: 'Helvetica Neue',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                           FlatButton(
-                              onPressed: () {},
-                              child: Text(
-                                  "${appdata.data[index]['name']} (${cities.length})")),
-                          FlatButton(
-                              onPressed: () {},
-                              child: const Text("Ver cidades"))
+                              onPressed: () {
+                                seeCityAction(context, index);
+                              },
+                              child: const Text(
+                                "Ver cidades",
+                                style: TextStyle(
+                                    fontFamily: 'Helvetica Neue',
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey),
+                              ))
                         ],
                       ),
                       Container(
-                        height: 130,
+                        height: 150,
                         margin: const EdgeInsets.only(bottom: 15),
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: cities.length,
                           itemBuilder: (cityContext, cityIndex) {
                             return CityBox(
-                                data: cities[cityIndex], onTap: () {});
+                                data: cities[cityIndex], onTap: cityBoxAction);
                           },
                         ),
                       )
