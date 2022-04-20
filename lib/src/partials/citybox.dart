@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CityBox extends StatelessWidget {
-   CityBox({@required this.data, this.onTap});
+  CityBox({@required this.data, this.onTap});
 
   final data;
-  final  Function ?onTap;
+  final Function? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
       child: GestureDetector(
-        onTap: (){onTap!(data);},
+        onTap: () {
+          onTap!(data);
+        },
         child: Stack(children: [
           AspectRatio(
             aspectRatio: 1 / 1,

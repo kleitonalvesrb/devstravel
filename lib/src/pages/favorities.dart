@@ -5,46 +5,36 @@ import '../models/appdata.dart';
 import '../partials/customappbar.dart';
 import '../partials/customdrawer.dart';
 
-class ListCityPage extends StatelessWidget {
+class FavoritePage extends StatelessWidget {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   TextStyle styles = const TextStyle(
       fontSize: 15, fontWeight: FontWeight.bold, fontFamily: 'Helvetica Neue');
 
-  void cityBoxAction(pageContext, cityData) {
-    Navigator.pushNamed(pageContext, '/city', arguments: cityData);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final continenteIndex =
-        ModalRoute.of(context)!.settings.arguments.toString();
-
     return Consumer<AppData>(builder: (ctx, appdata, child) {
-      var cities = [];
-      for (var country in appdata.data[int.parse(continenteIndex)]
-          ['countries']) {
-        cities.addAll(country['cities']);
-      }
-
+      List favoriteis = appdata.favoritesCities();
+      print(favoriteis);
       return Scaffold(
         key: _scaffoldKey,
         appBar: CustomAppBar(
             scaffoldKey: _scaffoldKey,
             pageContext: context,
-            title:
-                "${appdata.data[int.parse(continenteIndex)]['name']} (${cities.length} cidades)",
-            hideSearch: false,
-            showBack: true),
+            title: 'Cidades Salvas',
+            hideSearch: false),
         drawer: CustomDrawer(pageContext: context),
         backgroundColor: Colors.white,
         body: GridView.count(
-          crossAxisCount: 3,
-          children: List.generate(cities.length, (index) {
+          // padding: const EdgeInsets.only(bottom: 0),
+          // shrinkWrap: true,
+          crossAxisCount: 2,
+          // childAspectRatio: 10 / 11,
+          children: List.generate(favoriteis.length, (index) {
             return CityBox(
-              data: cities[index],
+              data: favoriteis[index],
               onTap: (cityData) {
-                cityBoxAction(context, cityData);
+                Navigator.pushNamed(context, '/city', arguments: cityData);
               },
             );
           }),
